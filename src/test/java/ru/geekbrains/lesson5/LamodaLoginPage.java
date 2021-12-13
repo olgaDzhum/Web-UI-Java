@@ -28,11 +28,11 @@ public class LamodaLoginPage {
     @Test
     @DisplayName("Авторизация с валидным логином и паролем")
     void positiveAuthorization() {
-        webDriver = WebDriverManager.chromedriver().create();
+       webDriver = WebDriverManager.chromedriver().create();
         webDriver.get(basicUrl);
 
         webDriver.findElement(By.xpath("//div[@class='logo-line-wrapper width-wrapper']//a[contains(text(),'Войти')]")).click();
-        webDriverWait = new WebDriverWait(webDriver, 5);
+      webDriverWait = new WebDriverWait(webDriver, 5);
         webDriverWait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[contains(.,'Вход')]")));
         webDriver.findElement(By.xpath("//div[@class='input__group']//input[@name='Электронная почта']")).sendKeys(validLogin);
         webDriver.findElement(By.xpath("//input[@name='Пароль']")).sendKeys(validPassword);
@@ -41,6 +41,8 @@ public class LamodaLoginPage {
         webDriverWait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[contains(text(),'Профиль')]")));
         webDriver.quit();
     }
+
+
 
     @SneakyThrows
     @Test
@@ -87,7 +89,7 @@ public class LamodaLoginPage {
     @SneakyThrows
     @DisplayName("Авторизация с валидным логином и валидным паролем меньше 6 символов")
     void negativePasswordAuthorizationShortPassword() {
-        webDriver = WebDriverManager.chromedriver().create();
+       webDriver = WebDriverManager.chromedriver().create();
 
         webDriver.get(basicUrl);
         webDriver.findElement(By.xpath("//div[@class='logo-line-wrapper width-wrapper']//a[contains(text(),'Войти')]")).click();
