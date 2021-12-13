@@ -44,12 +44,12 @@ public class LamodaCatalogPageTest {
         Thread.sleep(2000);
         webDriver.findElement(By.xpath("//div[@class='multifilter multifilter_price']//span[contains(text(),'Применить')]")).click();
         Thread.sleep(2000);
-        List<WebElement> products = webDriver.findElements(By.xpath(".//div[@class='products-list-item']"));
+        List<WebElement> products = webDriver.findElements(By.xpath("//div[@class='products-list-item']"));
         Iterator<WebElement> iterator = products.iterator();
         SoftAssertions softAssertions =new SoftAssertions();
         while (iterator.hasNext()) {
           //  WebElement element = iterator.next();
-            String actualValue = iterator.next().findElement(By.xpath("//span[@class='price__action js-cd-discount ']")).getText();
+            String actualValue = iterator.next().findElement(By.xpath(".//span[@class='price__action js-cd-discount ']")).getText();
             System.out.println(actualValue);
             softAssertions.assertThat(actualValue).isEqualTo("1 000");
         }
