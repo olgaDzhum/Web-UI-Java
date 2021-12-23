@@ -1,5 +1,6 @@
 package ru.geekbrains.lesson6.blocks;
 
+import io.qameta.allure.Step;
 import lombok.SneakyThrows;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -23,7 +24,8 @@ public class HeaderBlock extends BaseView {
         super(webDriver, webDriverWait);
     }
 
-@SneakyThrows
+    @SneakyThrows
+    @Step("Нажатие кнопки 'Вход' ")
     public LoginPage clickEnterButton(){
         enterButton.click();
         webDriverWait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[contains(.,'Вход')]")));
@@ -31,22 +33,24 @@ public class HeaderBlock extends BaseView {
     }
 
     @SneakyThrows
+    @Step("Навести мышь на элемент: {0} ")
     public HeaderBlock hoverHeaderMenuCatalogElement (String nameOfCatalog){
         new Actions(webDriver).moveToElement(webDriver.findElement(By.xpath("//div[@id='menu']//a[contains(text(),'"+nameOfCatalog+"')]")))
                 .build()
                 .perform();
 
-        Thread.sleep(3000);
+        Thread.sleep(2000);
         return this;
     }
 
+
     @SneakyThrows
-    public CatalogPage clickToChooseElement (String nameOfCatalog){
+    @Step("Кликнуть на элемент: {0}")
+    public CatalogPage clickToChooseElement (String nameOfCatalog) {
         // webDriverWait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[contains(text(),'Брюки')]")));
-        webDriverWait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[contains(text(),'Категории')]//..//..//a[contains(text(),'"+nameOfCatalog+"')]")));
-        Thread.sleep(3000);
-        webDriver.findElement(By.xpath("//a[contains(text(),'Категории')]//..//..//a[contains(text(),'"+nameOfCatalog+"')]")).click();
-        return new CatalogPage(webDriver,webDriverWait);
+        webDriverWait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[contains(text(),'" + nameOfCatalog + "')]"))); // второй вариант xpath: //a[contains(text(),'Категории')]//
+        webDriver.findElement(By.xpath("//a[contains(text(),'" + nameOfCatalog + "')]")).click();
+        return new CatalogPage(webDriver, webDriverWait);
     }
 
 

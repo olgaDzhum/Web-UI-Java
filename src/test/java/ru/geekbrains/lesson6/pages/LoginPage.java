@@ -1,5 +1,6 @@
 package ru.geekbrains.lesson6.pages;
 
+import io.qameta.allure.Step;
 import lombok.SneakyThrows;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -22,44 +23,49 @@ public class LoginPage extends BasePage {
     }
 
     @SneakyThrows
+    @Step("Авторизоваться с логином {0} и паролем {1}")
     public LoginPage positiveAuthorization(String validLogin, String validPassword) {
         loginInput.sendKeys(validLogin);
         passwordInput.sendKeys(validPassword);
-        Thread.sleep(2000);
+        Thread.sleep(1000);
         webDriver.findElement(By.xpath("//button[contains(text(),'Войти')]")).click();
         return this;
     }
 
+    @Step("Проверка наличия кнопки: 'Профиль'")
     public LoginPage checkSuccessfulAuthorization() {
         webDriverWait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[contains(text(),'Профиль')]")));
         return this;
     }
 
     @SneakyThrows
+    @Step("Авторизоваться с логином {0} и паролем {1}")
     public LoginPage invalidPasswordAuthorization(String validLogin, String invalidPassword) {
         loginInput.sendKeys(validLogin);
         passwordInput.sendKeys(invalidPassword);
-        Thread.sleep(2000);
+        Thread.sleep(1000);
         webDriver.findElement(By.xpath("//button[contains(text(),'Войти')]")).click();
         return this;
     }
 
     @SneakyThrows
+    @Step("Проверка наличия сообщения: 'Неверный логин или пароль'")
     public LoginPage checkInvalidPasswordAuthorization() {
         webDriverWait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@class='d-modal__frame']//div[contains(text(),'Неверный логин или пароль')]")));
-        Thread.sleep(1000);
         return this;
     }
 
     @SneakyThrows
+    @Step("Авторизоваться с логином {0} и паролем {1}")
     public LoginPage invalidLoginAuthorization(String inValidLoginMoreThenSixSymbolsLong, String validPassword) {
         loginInput.sendKeys(inValidLoginMoreThenSixSymbolsLong);
         passwordInput.sendKeys(validPassword);
-        Thread.sleep(2000);
+        Thread.sleep(1000);
         webDriver.findElement(By.xpath("//button[contains(text(),'Войти')]")).click();
         return this;
     }
 
+    @Step("Проверка наличия сообщения: 'Неверный логин или пароль'")
     public LoginPage checkInvalidLoginAuthorization() {
         webDriverWait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@class='d-modal__frame']//div[contains(text(),'Неверный логин или пароль')]")));
         return this;
@@ -67,30 +73,31 @@ public class LoginPage extends BasePage {
 
 
     @SneakyThrows
+    @Step("Авторизоваться с логином {0} и паролем {1}")
     public LoginPage inputLoginNotEmail(String invalidLoginNotEMail, String validPassword) {
         loginInput.sendKeys(invalidLoginNotEMail);
         passwordInput.sendKeys(validPassword);
-        Thread.sleep(2000);
         return this;
     }
 
+    @Step("Проверка наличия сообщения: 'Пожалуйста, проверьте, правильно ли указан адрес электронной почты'")
     public LoginPage checkInputLoginNotEmail() {
         webDriverWait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[contains(text(),'Пожалуйста, проверьте, правильно ли указан адрес электронной почты.')] ")));
         return this;
     }
 
     @SneakyThrows
+    @Step("Авторизоваться с логином {0} и паролем {1}")
     public LoginPage inputPasswordLessThenSixSymbols(String validLogin, String passwordLessThenSixSymbolsLong) {
         loginInput.sendKeys(validLogin);
         passwordInput.sendKeys(passwordLessThenSixSymbolsLong);
-        Thread.sleep(2000);
         return this;
     }
 
     @SneakyThrows
+    @Step("Проверка наличия сообщения: 'Пароль должен содержать не менее 6 символов'")
     public LoginPage checkInputPasswordLessThenSixSymbols() {
         webDriverWait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[contains(text(),'Пароль должен содержать не менее 6 символов.')]")));
-        Thread.sleep(1000);
         return this;
     }
 

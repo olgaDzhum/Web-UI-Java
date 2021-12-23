@@ -1,5 +1,6 @@
 package ru.geekbrains.lesson6;
 
+import jdk.jfr.Description;
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -25,6 +26,7 @@ public class LamodaLoginPageTest extends BasicTest{
     @SneakyThrows
     @Test
     @DisplayName("Авторизация с валидным логином и паролем")
+    @Description("Проверка успешной вторизации")
     void positiveAuthorization() {
 
         webDriver.get(basicUrl);
@@ -37,6 +39,7 @@ public class LamodaLoginPageTest extends BasicTest{
     @SneakyThrows
     @Test
     @DisplayName("Авторизация с невалидным логином и валидным паролем")
+    @Description("Наличие сообщения о некорректном логине")
     void negativeLoginAuthorization() {
 
         webDriver.get(basicUrl);
@@ -48,6 +51,7 @@ public class LamodaLoginPageTest extends BasicTest{
     @SneakyThrows
     @Test
     @DisplayName("Авторизация с валидным логином и невалидным паролем больше 6 символов")
+    @Description("Наличие сообщения о некорректном пароле")
     void negativePasswordAuthorization() {
 
         webDriver.get(basicUrl);
@@ -60,6 +64,7 @@ public class LamodaLoginPageTest extends BasicTest{
     @Test
     @SneakyThrows
     @DisplayName("Ввод в поле пароля меньше 6 символов")
+    @Description("Наличие сообщения о том, что пароль должен быть больше 6 символов")
     void negativePasswordAuthorizationShortPassword() {
 
         webDriver.get(basicUrl);
@@ -71,6 +76,7 @@ public class LamodaLoginPageTest extends BasicTest{
     @Test
     @SneakyThrows
     @DisplayName("Ввод в поле не e-mail")
+    @Description("Наличие сообщения о том, что логином должна быть электронная почта")
     void negativeLoginNotEmailAuthorization() {
 
         webDriver.get(basicUrl);
